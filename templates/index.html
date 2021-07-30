@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width", initial-scale="1.0">
+      <title> Book Store</title>
+      <link rel="stylesheet" href="/static/style.css">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   </head>   
+
+   <body>
+      <div class="header">
+         <div class="container">
+            <div class="navbar">
+               <div class="logo">
+                  <img src="/static/images/logo2.png" width="125px">
+               </div>
+   
+               <nav>
+                  <ul id="MenuItems">
+                     <li><a href="/index">Home</a></li>
+                     <li><a href="/products">Books</a></li>
+                     <li><a href="">About</a></li>
+                     <li><a href="">Contact</a></li>
+                     <li><a href="/account">Account</a></li>
+                  </ul>
+               </nav>
+               <img src="/static/images/cart.png" width="30px" height="30px">
+               <img src="/static/images/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+            
+            <div class="row">
+               <div class="col-2">
+                  <h1>Give your brain a workout<br>A New Style!</h1>
+                  <p>Read new books to discover new knowledge and become better.</p>
+                  <a href="" class="btn">Explore Now &#8594;</a>
+               </div>
+               <div class="col-2">
+                  <img src="/static/images/image-1.png">
+               </div>   
+            </div>
+         </div>
+      </div>
+    
+   
+   <!-----Featured Categories------->
+   <div class="categories">
+      <div class="small-container">
+         <h2 class="title">Featured Categories</h2>
+         <div class="row">
+            <div class="col-3">
+               <img src="/static/images/category-fantasy.png" width="400px">
+               <h4>Fantasy</h4>
+            </div>
+            <div class="col-3">
+               <img src="/static/images/category-horror.png" width="400px">
+               <h4>Horror</h4>
+            </div>
+            <div class="col-3">
+               <img src="/static/images/category-romance.png" width="400px">
+               <h4>Romance</h4>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <!----Featured Products------->
+   <div class="small-container">
+      <h2 class="title">Featured Products</h2>
+      <div class="row">
+         <div class="col-4">
+            <img src="/static/images/product-1.jpg" width="200px">
+            <h4>The Fault In Our Stars</h4>
+            <p>by John Green</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-half-o"></i>
+               <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs.450</p>
+         </div>
+   
+         <div class="col-4">
+            <img src="/static/images/product-2.jpg" width="200px">
+            <h4>1984</h4>
+            <p>by George Orwell</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-half-o"></i>
+            </div>
+            <p>Rs. 550</p>
+         </div>
+   
+         <div class="col-4">
+            <img src="/static/images/product-3.jpg" width="200px">
+            <h4>How to Make Anyone Fall in Love With You</h4>
+            <p>by Leil Lowndes</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs. 420</p>
+         </div>
+   
+         <div class="col-4">
+            <img src="/static/images/product-4.jpg" width="200px">
+            <h4>complete ghost stories</h4>
+            <p>by Charles Dickens</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs. 650</p>
+         </div>
+      </div>
+     
+      <!----------New Arrivals------------>
+      <h2 class="title">New Arrivals</h2>
+      <div class="row">
+         <div class="col-4">
+            <img src="/static/images/product-5.jpg" width="200px">
+            <h4>His Afflicted Mind</h4>
+            <p>by Prabigyan Aryal</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-half-o"></i>
+               <i class="fa fa-star-o"></i>
+             </div>
+            <p>Rs. 400</p>
+         </div>
+   
+         <div class="col-4">
+            <img src="/static/images/product-6.jpg" width="200px">
+            <h4>The Archer</h4>
+            <p>by Paulo Coelho</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-half-o"></i>
+            </div>
+            <p>Rs.380</p>
+         </div>
+   
+         <div class="col-4">
+            <img src="/static/images/product-7.jpg" width="200px">
+            <h4>Home Body</h4>
+            <p>by Rupi Kaur</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs.750</p>
+         </div>
+   
+         <div class="col-4">
+            <img src= "/static/images/product-8.jpg"width="200px">
+            <h4>Harry Potter and the Deathly Hallows</h4>
+            <p>by JK Rowling</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs. 1050</p>
+         </div>
+      </div>
+      
+   </div>
+
+   <!----------Offer------------->
+   <div class="offer">
+      <div class="small-container">
+         <div class="row">
+            <div class="col-2">
+               <img src="/static/images/offer.png" class="offer-img" width="400px">
+            </div>
+            <div class="col-2">
+               <p>Exclusively Available on Suraj Bookstore.</p>
+               <h1>Finance Bundle</h1>
+               <small>Get multiple books related to finance and daily life for a discounted price.</small>
+               <br>
+               <a href="" class="btn">Buy Now &#8594;</a>
+            </div>
+         
+         </div>
+      </div>
+   </div>
+
+<!---------Testimonial------------>
+   <div class="testimonial">
+      <div class="small-container">
+         <div class="row">
+            <div class="col-3">
+               <i class="fa fa-quote-left"></i>
+               <p>This is a dummy text which vets for the quality of the bookstore.</p>
+               <div class="rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+               </div>
+               <img src="/static/images/user-2.png">
+               <h3>Suman Lamsal</h3>
+            </div>
+
+            <div class="col-3">
+               <i class="fa fa-quote-left"></i>
+               <p>This is a dummy text which vets for the quality of the bookstore.</p>
+               <div class="rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-half-o"></i>
+               </div>
+               <img src="/static/images/user-1.png">
+               <h3>Nayanti Joe</h3>
+            </div>
+
+            <div class="col-3">
+               <i class="fa fa-quote-left"></i>
+               <p>This is a dummy text which vets for the quality of the bookstore.</p>
+               <div class="rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+               </div>
+               <img src="/static/images/user-3.png">
+               <h3>Jen Quinn</h3>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <!-------Footer-------->
+
+      <div class ="footer">
+         <div class="container">
+            <div class="row">
+               <div class="footer-col-1">
+                  <h3>Download Our App</h3>
+                  <p>Download App for Android and iOS mobile devices.</p>
+               </div>
+
+               <div class="footer-col-2">
+                  <p>Our Purpose Is To Make The Pleasure and Benefits of Books Accesible to the Many.</p>               
+               </div>
+
+               <div class="footer-col-3">
+                  <h3>Useful Links</h3>
+                  <ul>
+                     <li>Coupons</li>
+                     <li>Blog Post</li>
+                     <li>Return Policy</li>
+                     <li>Join Affiliate</li>
+                  </ul>
+               </div>
+
+               
+               <div class="footer-col-4">
+                  <h3>Follow Us:</h3>
+                  <ul>
+                     <li>Facebook</li>
+                     <li>Twitter</li>
+                     <li>Instagram</li>
+                     <li>Youtube</li>
+                  </ul>
+               </div>    
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2021 - Suraj Dealers </p>
+         </div>
+      </div>
+
+      <!-----js for toggle menu------->
+         <script>
+            var MenuItems = document.getElementById("MenuItems");
+
+            MenuItems.style.maxHeight = "0px";
+
+            function menutoggle(){
+               if(MenuItems.style.maxHeight == "0px")
+               {
+                  MenuItems.style.maxHeight = "200px"   
+               }
+               else
+               {
+                  MenuItems.style.maxHeight = "0px"
+               }
+            }
+         </script>
+   </body>
+
+</html>
