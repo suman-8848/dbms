@@ -22,7 +22,9 @@
             <nav>
                <ul id="MenuItems">
                   <li><a href="/index">Home</a></li>
-                  <li><a href="/productsd">Books</a></li>
+                  {% if user.is_authenticated %}
+                  <li><a href="/products">Books</a></li>
+                  {% endif %}
                   <li><a href="">About</a></li>
                   <li><a href="">Contact</a></li>
                   <li><a href="/account">Account</a></li>
@@ -45,58 +47,13 @@
       </div>
    </div>
 
-
-   <!-----Featured Categories------->
-   <div class="categories">
-      <div class="small-container">
-         <h2 class="title">Featured Categories</h2>
-         <div class="row">
-            <div class="col-3">
-               <img src="/static/images/category-fantasy.png" width="400px">
-               <h4>Fantasy</h4>
-            </div>
-            <div class="col-3">
-               <img src="/static/images/category-horror.png" width="400px">
-               <h4>Horror</h4>
-            </div>
-            <div class="col-3">
-               <img src="/static/images/category-romance.png" width="400px">
-               <h4>Romance</h4>
-            </div>
-         </div>
-      </div>
-   </div>
-
-
-   <!----Featured Products------->
-   <div class="small-container">
-      <h2 class="title">Featured Products</h2>
-      <div class="row">
-         {% for book in books %}
-         <div class="col-4">
-            <img src="/static/images/product-{{ book.Isbn_No }}.jpg" width="100px">
-            <h4>{{book.Title}}</h4>
-            <p>by {{book.Author}}</p>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-half-o"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>{{ book.Price}}</p>
-         </div>
-         {% endfor %}
-      </div>
-
-
-
       <!----------New Arrivals------------>
       <h2 class="title">New Arrivals</h2>
       <div class="row">
          {% for book in books %}
+         
          <div class="col-4">
-            <img src="/static/images/product-{{ book.Isbn_No }}.jpg" width="100px">
+            <img src="/static/images/product-{{ forloop.counter }}.jpg" width="100px">
             <h4>{{book.Title}}</h4>
             <p>by {{book.Author}}</p>
             <div class="rating">
@@ -106,6 +63,7 @@
                <i class="fa fa-star-half-o"></i>
                <i class="fa fa-star-o"></i>
             </div>
+            
             <p>{{ book.Price}}</p>
          </div>
          {% endfor %}

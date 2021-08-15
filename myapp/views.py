@@ -2,12 +2,14 @@ from django.db.models.fields import BooleanField
 from myapp.forms import Form
 from django.core.checks import messages
 from django.http.response import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from mysite import settings
 
 # Create your views here.
 
@@ -105,6 +107,13 @@ def userlogin(request):
             password = form.cleaned_data.get('password')
             print("username and password: ", username, password)
             user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(request.GET.get('next',
+                                            settings.LOGIN_REDIRECT_URL))
+            else:
+                error = 'Invalid username or password.'
             print("user", user)
             if user is not None:
                 #auth.login(request, user)

@@ -45,7 +45,7 @@
             </select>
         </div>
 
-        <div class="row">
+       <div class="row">
             <div class="col-4">
                 <img src="/static/images/product-1.jpg" width="200px">
                 <h4>The Fault In Our Stars</h4>
@@ -134,7 +134,7 @@
    
             <div class="col-4">
                 <img src="/static/images/product-7.jpg" width="200px">
-                <<h4>Home Body</h4>
+                <h4>Home Body</h4>
                 <p>by Rupi Kaur</p>
                 <div class="rating">
                    <i class="fa fa-star"></i>
@@ -217,7 +217,29 @@
                 </div>
                 <p>Rs. 720</p>
             </div>
-        </div>
+        </div> 
+        {% comment %} <h2 class="title">New Arrivals</h2>
+      <div class="row">
+         {% for book in books %}
+         <div class="col-4">
+            <img src="/static/images/product-{{ forloop.counter }}.jpg" width="100px">
+            <h4>{{book.Title}}</h4>
+            <p>by {{book.Author}}</p>
+            <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-half-o"></i>
+               <i class="fa fa-star-o"></i>
+            </div>
+            
+            <p>{{ book.Price}}</p>
+         </div>
+         {% endfor %}
+      </div>
+</div> {% endcomment %}
+
+   
 
         <div class="page-btn">
             <span>1</span>
