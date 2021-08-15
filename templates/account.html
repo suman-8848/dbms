@@ -112,7 +112,7 @@
 		}
 	</style>
 </head>
-{% if user.is_authenticated %}
+
 <body>
 	<div class="header">
 		<div class="container">
@@ -124,9 +124,9 @@
 				<nav>
 					<ul id="MenuItems">
 						<li><a href="/index">Home</a></li>
-						{% if user.is_authenticated %}
+						
 						<li><a href="/products">Books</a></li>
-						{%endif%}
+						
 						<li><a href="">About</a></li>
 						<li><a href="">Contact</a></li>
 						<li><a href="/account">Account</a></li>
@@ -170,5 +170,5 @@
 			</div>
 
 </body>
-{%endif%}
+
 </html>

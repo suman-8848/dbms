@@ -137,5 +137,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
 ]
-LOGIN_REDIRECT_URL = '/products'
+LOGIN_REDIRECT_URL = '/admin'
 LOGIN_URL='/auth/login/'

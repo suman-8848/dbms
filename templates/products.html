@@ -45,7 +45,7 @@
             </select>
         </div>
 
-       <div class="row">
+       {% comment %} <div class="row">
             <div class="col-4">
                 <img src="/static/images/product-1.jpg" width="200px">
                 <h4>The Fault In Our Stars</h4>
@@ -217,8 +217,8 @@
                 </div>
                 <p>Rs. 720</p>
             </div>
-        </div> 
-        {% comment %} <h2 class="title">New Arrivals</h2>
+        </div>  {% endcomment %}
+         <h2 class="title">New Arrivals</h2>
       <div class="row">
          {% for book in books %}
          <div class="col-4">
@@ -237,7 +237,7 @@
          </div>
          {% endfor %}
       </div>
-</div> {% endcomment %}
+</div> 
 
    
 
