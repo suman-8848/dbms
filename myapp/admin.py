@@ -20,3 +20,5 @@ admin.site.unregister(User)
 
 
 admin.site.site_header = 'Book Store'
+admin.site.index_title = 'Book Store'
+admin.site.site_title = "Admin"

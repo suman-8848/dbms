@@ -144,3 +144,9 @@ LOGIN_URL='/auth/login/'
 JAZZMIN_UI_TWEAKS = {
     "theme": "spacelab",
 }
+
+JAZZMIN_SETTINGS = {
+    "site_logo": "/images/book.png",
+    "site_logo_classes": "img-square",
+    "welcome_sign": "Welcome to the Book Store",
+}
