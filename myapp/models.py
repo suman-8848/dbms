@@ -4,13 +4,16 @@ from django.db import models
 # Create your models here.
 
 
-class customer(models.Model):
-    Name = models.CharField(max_length=50)
-    Email = models.CharField(max_length=50)
-    phone_number = models.IntegerField(10)
+class Customer(models.Model):
+    Name = models.CharField(max_length=20, default=None)
+    lastName = models.CharField(max_length=20,default=None)
+    Email = models.CharField(max_length=50,default=None)
+    phone_number = models.IntegerField(10,default=None)
     costID = models.IntegerField(primary_key=True)
-    state = models.CharField(max_length=50)
-    postal_code = models.IntegerField()
+    city = models.CharField(max_length=20,default=None)
+    state = models.CharField(max_length=50,default=None)
+    postal_code = models.IntegerField(10,default=None)
+    password = models.CharField(max_length=100,default=None)
 
     def __str__(self):
         return self.Name

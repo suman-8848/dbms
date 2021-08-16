@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width" , initial-scale="1.0">
-	<title> Book Store</title>
-	<link rel="stylesheet" href="/static/style.css">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-		rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% block main %}
+
 	<style>
 		body {
 			font-family: 'Varela Round', sans-serif;
@@ -111,44 +96,25 @@
 			margin: 100px auto;
 		}
 	</style>
-</head>
-
-<body>
-	<div class="header">
-		<div class="container">
-			<div class="navbar">
-				<div class="logo">
-					<img src="/static/images/logo2.png" width="125px">
-				</div>
-
-				<nav>
-					<ul id="MenuItems">
-						<li><a href="/index">Home</a></li>
-						
-						<li><a href="/products">Books</a></li>
-						
-						<li><a href="">About</a></li>
-						<li><a href="">Contact</a></li>
-						<li><a href="/account">Account</a></li>
-					</ul>
-				</nav>
-				<img src="/static/images/cart.png" width="30px" height="30px">
-				<img src="/static/images/menu.png" class="menu-icon" onclick="menutoggle()">
-			</div>
 
 			<!-- Modal HTML -->
 
 			<div class="modal-dialog modal-login">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Member Login</h4>
-
+						<h4 class="modal-title">User Login</h4>
 					</div>
+					{% if err %}
+					<div class="alert alert-danger" role="alert">
+            			{{err}}
+        			</div>
+					{% endif %}
 					<div class="modal-body">
-						<form method="POST" action=" {% url 'userlogin' %}">
+						<form method="POST" action="userlogin">
+							{% csrf_token %}
 							<div class="form-group">
 								<i class="fa fa-user"></i>
-								<input type="text" name='username' class="form-control" placeholder="username"
+								<input type="text" name='username' class="form-control" placeholder="Email"
 									required="required">
 							</div>
 							<div class="form-group">
@@ -163,12 +129,10 @@
 
 					</div>
 					<div class="modal-footer">
-						<p>Don't have account?<a href="{% url 'register' %}">Register</a></p>
+						<p>Don't have account?<a href="register">Register</a></p>
 
 					</div>
 				</div>
 			</div>
 
-</body>
-
-</html>
+{% endblock main %}
