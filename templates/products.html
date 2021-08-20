@@ -1,81 +1,88 @@
+{% load cartUtils %}
 <!DOCTYPE html>
 
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width", initial-scale="1.0">
-      <title> All Products | Book Store</title>
-      <link rel="stylesheet" href="/static/style.css">
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-   </head>   
 
-   <body>
-   
-        <div class="container">
-            <div class="navbar">
-               <div class="logo">
-                  <img src="/static/images/logo2.png" width="125px">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+   <title> All Products | Book Store</title>
+   <link rel="stylesheet" href="/static/style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+
+<body>
+
+   <div class="container">
+      <div class="navbar">
+         <div class="logo">
+            <img src="/static/images/logo2.png" width="125px">
+         </div>
+
+         <nav class>
+            <ul id="MenuItems">
+               <li><a href="/index">Home</a></li>
+               <li><a href="/products">Books</a></li>
+               <li><a href="">About</a></li>
+               <li><a href="">Contact</a></li>
+               <li><a href="/account">Account</a></li>
+            </ul>
+         </nav>
+         <img src="/static/images/cart.png" width="30px" height="30px">
+         <img src="/static/images/menu.png" class="menu-icon" onclick="menutoggle()">
+      </div>
+
+   </div>
+   <form method="POST" action="products">
+      {% csrf_token %}
+      <div class="row justify-content-right">
+         <div class="col-1 col-md-1 col-lg-8">
+            <div class="card-body row no-gutters align-items-right">
+
+               <div class="col">
+                  <input class="form-control form-control-lg form-control-borderless" type="search"
+                     placeholder="Search for title" name="search" id="search">
                </div>
-   
-               <nav>
-                  <ul id="MenuItems">
-                     <li><a href="/index">Home</a></li>
-                     <li><a href="/products">Books</a></li>
-                     <li><a href="">About</a></li>
-                     <li><a href="">Contact</a></li>
-                     <li><a href="/account">Account</a></li>
-                  </ul>
-               </nav>
-               <img src="/static/images/cart.png" width="30px" height="30px">
-               <img src="/static/images/menu.png" class="menu-icon" onclick="menutoggle()">
+               <!--end of col-->
+               <div class="col-auto">
+                  <button class="btn btn-lg btn-success" type="submit">Search
+                     <i class="fas fa-search"></i>
+                  </button>
+               </div>
+               <!--end of col-->
             </div>
-            
-        </div>
-  <form method="POST" action = "search">
-  {% csrf_token %}
-	<div class="row justify-content-right">
-                        <div class="col-1 col-md-1 col-lg-8">
-                                <div class="card-body row no-gutters align-items-right">
-                                    <div class="col-auto">
-                                        <i class="fas fa-search h4 text-body"></i>
-                                    </div>
-                                    <!--end of col-->
-                                    <div class="col">
-                                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search for title" name = "search" id = "search">
-                                    </div>
-                                    <!--end of col-->
-                                    <div class="col-auto">
-                                        <button class="btn btn-lg btn-success" type="submit">Search</button>
-                                    </div>
-                                    <!--end of col-->
-                                </div>
-                            
-                        </div>
-                        <!--end of col-->
-                    </div>
-</div>
-</form>
-<div class="small-container">
-        <div class= "row">
-            <h2><a href="/products">All Products</a></h2>
-            <select>
-                <option>Default Sorting</option>
-                <option value = 'price'>Sort by Price</option>
-                <option value = 'categories'>Sort by categories</option>
-                <option value = 'name'>Sort by name</option>
-            </select>
-            
-        </div>
-<h2 class="title">New Arrivals</h2>
+
+         </div>
+         <!--end of col-->
+      </div>
+      </div>
+   </form>
+   <div class="small-container">
+      <div class="row">
+         <h2><a href="/products">All Products</a></h2>
+         <select>
+            <option>Default Sorting</option>
+            <option value='price'>Sort by Price</option>
+            <option value='categories'>Sort by categories</option>
+            <option value='name'>Sort by name</option>
+         </select>
+
+      </div>
+      {% if not search %}
+      <h2 class="title">New Arrivals</h2>
+      {% else %}
+      <h2 class="title">Searched results</h2>
+      {% endif %}
       <div class="row">
          {% for book in books %}
-         <div class="col-4">
-            <img src={{book.CoverImage}} width="100px">
+         <div class="col-4" id="{{book.Isbn_No}}">
+            <img src={{book.CoverImage}} width="100px" height="420px">
             <h4>{{book.Title}}</h4>
             <p>by {{book.Author}}</p>
             <div class="rating">
@@ -85,85 +92,125 @@
                <i class="fa fa-star-half-o"></i>
                <i class="fa fa-star-o"></i>
             </div>
-            
-            <p>{{ book.Price}}</p>
+
+            Rs. {{ book.Price}}</br>
+
+            <form method="POST" , action="products#{{book.Isbn_No}}">
+               {% csrf_token %}
+               <input readonly hidden type="text" value="{{book.Isbn_No}}" name="Isbn">
+               {% if book|isInStock:request.session.cart %}
+               <button type="submit" class="btn btn-outline-danger my-0 justify-item-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
+                     viewBox="0 0 16 16">
+                     <path
+                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
+                     </path>
+                  </svg>
+                  Add to cart
+                  <input style="cursor: pointer;" class="form-control text-center" type="text"
+                     placeholder="{{book |remainingStock:request.session.cart}} in Stock" readonly>
+               </button>
+               {% else %}
+               <button style="cursor: not-allowed;" type="submit" class="btn btn-danger my-0" disabled>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
+                     viewBox="0 0 16 16">
+                     <path
+                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
+                     </path>
+                  </svg>
+                  Out of Stock
+                  <input style="cursor: not-allowed;" class="form-control text-center" type="text"
+                     placeholder="{{book |remainingStock:request.session.cart}} in Stock" readonly>
+               </button>
+               {% endif %}
+            </form>
          </div>
          {% endfor %}
       </div>
-</div> 
-
-   
-
-        <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
-        </div>
-    </div>
-     
-      
+   </div>
 
 
-   
+
+   <div class="page-btn">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>&#8594;</span>
+   </div>
+   </div>
+
+   <form class="container" action="checkout" method = "POST">
+   {% csrf_token %}
+      <div class="fixed-bottom" style="left:inherit">
+          <button class='btn btn-success'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" fill="currentColor" class="bi bi-cart"
+            viewBox="0 0 16 16">
+            <path
+               d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
+            </path>
+         </svg>
+         <span class="badge badge-pill badge-danger">{{request.session.cart|itemsInCart}}</span>
+          </button>
+      </div>
+  </form>
+
+
    <!-------Footer-------->
 
-      <div class ="footer">
-         <div class="container">
-            <div class="row">
-               <div class="footer-col-1">
-                  <h3>Download Our App</h3>
-                  <p>Download App for Android and iOS mobile devices.</p>
-               </div>
-
-               <div class="footer-col-2">
-                  <p>Our Purpose Is To Make The Pleasure and Benefits of Books Accesible to the Many.</p>               
-               </div>
-
-               <div class="footer-col-3">
-                  <h3>Useful Links</h3>
-                  <ul>
-                     <li>Coupons</li>
-                     <li>Blog Post</li>
-                     <li>Return Policy</li>
-                     <li>Join Affiliate</li>
-                  </ul>
-               </div>
-
-               
-               <div class="footer-col-4">
-                  <h3>Follow Us:</h3>
-                  <ul>
-                     <li>Facebook</li>
-                     <li>Twitter</li>
-                     <li>Instagram</li>
-                     <li>Youtube</li>
-                  </ul>
-               </div>    
+   <div class="footer">
+      <div class="container">
+         <div class="row">
+            <div class="footer-col-1">
+               <h3>Download Our App</h3>
+               <p>Download App for Android and iOS mobile devices.</p>
             </div>
-            <hr>
-            <p class="copyright">Copyright 2021 - Suraj Dealers </p>
+
+            <div class="footer-col-2">
+               <p>Our Purpose Is To Make The Pleasure and Benefits of Books Accesible to the Many.</p>
+            </div>
+
+            <div class="footer-col-3">
+               <h3>Useful Links</h3>
+               <ul>
+                  <li>Coupons</li>
+                  <li>Blog Post</li>
+                  <li>Return Policy</li>
+                  <li>Join Affiliate</li>
+               </ul>
+            </div>
+
+
+            <div class="footer-col-4">
+               <h3>Follow Us:</h3>
+               <ul>
+                  <li>Facebook</li>
+                  <li>Twitter</li>
+                  <li>Instagram</li>
+                  <li>Youtube</li>
+               </ul>
+            </div>
          </div>
+         <hr>
+         <p class="copyright">Copyright 2021 - Suraj Dealers </p>
       </div>
+   </div>
 
-      <!-----js for toggle menu------->
-         <script>
-            var MenuItems = document.getElementById("MenuItems");
+   <!-----js for toggle menu------->
+   <script>
+      var MenuItems = document.getElementById("MenuItems");
 
-            MenuItems.style.maxHeight = "0px";
+      MenuItems.style.maxHeight = "0px";
 
-            function menutoggle(){
-               if(MenuItems.style.maxHeight == "0px")
-               {
-                  MenuItems.style.maxHeight = "200px"   
-               }
-               else
-               {
-                  MenuItems.style.maxHeight = "0px"
-               }
-            }
-         </script>
-   </body>
+      function menutoggle() {
+         if (MenuItems.style.maxHeight == "0px") {
+            MenuItems.style.maxHeight = "200px"
+         }
+         else {
+            MenuItems.style.maxHeight = "0px"
+         }
+      }
+   </script>
+</body>
 
 </html>

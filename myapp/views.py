@@ -2,7 +2,7 @@ import myapp
 from django.db.models.fields import BooleanField
 #from myapp.forms import Form
 from django.core.checks import messages
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, logout, login
@@ -16,12 +16,15 @@ from django.contrib.auth.hashers import make_password,check_password
 from django.urls import reverse
 # Create your views here.
 
+#selectedBooks = None
+search = None
 
 def index(request):
     bookdetail = Book.objects.all()
     dict = {
         'books': bookdetail
     }
+    request.session['cart'] = {}
     return render(request, 'index.html', dict)
 
 
@@ -30,10 +33,28 @@ def account(request):
 
 
 def products(request):
-    bookdetail = Book.objects.all()
-    dict = {
-        'books': bookdetail
-    }
+    
+    try:
+        global search
+        search = request.POST['search']
+    except:
+        print("Search is none.")
+    if search:
+        searched = Book.objects.filter(Title__icontains = search)
+        dict = {
+            'books': searched,
+            'search':True
+
+        }
+    else:
+        bookdetail = Book.objects.all()
+        dict = {
+            'books': bookdetail,
+            'search': False
+        }
+    if request.POST.get('Isbn') is not None:
+        cart(request)
+
     return render(request, 'products.html',dict)
 
 
@@ -74,6 +95,8 @@ def register(request):
             err = "Email already registered."
         elif not customer.city.isalpha():
             err = "City cannot contain numbers and special characters."
+        elif len(customer.phone_number)<10:
+            err = "Phone number invalid."
         elif customer.password != confirmedPassword:
             err = "Passwords do not match."
         
@@ -130,14 +153,14 @@ def userlogin(request):
         
         return render(request,'account.html',{'err':err})
 
-def search(request):
-    search = request.POST['search']
-    searched = Book.objects.filter(Title__icontains = search)
-    dict = {
-        'books': searched
+# def search(request):
+#     search = request.POST['search']
+#     searched = Book.objects.filter(Title__icontains = search)
+#     dict = {
+#         'books': searched
 
-    }
-    return render(request,'search.html',dict)
+#     }
+#     return render(request,'search.html',dict)
 
 # def userlogin(request):
 #     if request.method == 'POST':
@@ -171,3 +194,26 @@ def search(request):
 #         else:
 #             # messages.Info(request, "Invalid username or password.")
 #             print('invalid usr pass')
+
+def cart(request):
+    ISBN = request.POST['Isbn']
+    cartObject = request.session.get('cart')
+    if cartObject:
+        if cartObject.get(ISBN):
+            cartObject[ISBN] += 1
+        else:
+            cartObject[ISBN] = 1
+    else:
+        cartObject = {}
+        cartObject[ISBN] = 1
+    request.session['cart'] = cartObject
+
+def checkout(request):
+    books = []
+    for k in request.session.get('cart'):
+        books.append(Book.objects.get(Isbn_No = k))
+
+    context = {
+        'books':books
+    }
+    return render(request,'checkout.html',context)
