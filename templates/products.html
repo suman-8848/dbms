@@ -8,9 +8,14 @@
       <link rel="stylesheet" href="/static/style.css">
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
    </head>   
 
    <body>
+   
         <div class="container">
             <div class="navbar">
                <div class="logo">
@@ -31,198 +36,46 @@
             </div>
             
         </div>
-      
-
-   <div class="small-container">
+  <form method="POST" action = "search">
+  {% csrf_token %}
+	<div class="row justify-content-right">
+                        <div class="col-1 col-md-1 col-lg-8">
+                                <div class="card-body row no-gutters align-items-right">
+                                    <div class="col-auto">
+                                        <i class="fas fa-search h4 text-body"></i>
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col">
+                                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search for title" name = "search" id = "search">
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col-auto">
+                                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                                    </div>
+                                    <!--end of col-->
+                                </div>
+                            
+                        </div>
+                        <!--end of col-->
+                    </div>
+</div>
+</form>
+<div class="small-container">
         <div class= "row">
-            <h2>All Products</h2>
+            <h2><a href="/products">All Products</a></h2>
             <select>
                 <option>Default Sorting</option>
-                <option>Sort by Price</option>
-                <option>Sort by Popularity</option>
-                <option>Sort by Rating</option>
-                <option>Sort by Sale</option>
+                <option value = 'price'>Sort by Price</option>
+                <option value = 'categories'>Sort by categories</option>
+                <option value = 'name'>Sort by name</option>
             </select>
+            
         </div>
-
-       {% comment %} <div class="row">
-            <div class="col-4">
-                <img src="/static/images/product-1.jpg" width="200px">
-                <h4>The Fault In Our Stars</h4>
-                <p>by John Green</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs.450</p>
-            </div>
-    
-            <div class="col-4">
-                <img src="/static/images/product-2.jpg" width="200px">
-                <h4>1984</h4>
-                <p>by George Orwell</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                </div>
-                <p>Rs. 550</p>
-            </div>
-   
-            <div class="col-4">
-                <img src="/static/images/product-3.jpg" width="200px">
-                <h4>How to Make Anyone Fall in Love With You</h4>
-                <p>by Leil Lowndes</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 420</p>
-            </div>
-    
-            <div class="col-4">
-                <img src="/static/images/product-4.jpg" width="200px">
-                <h4>complete ghost stories</h4>
-                <p>by Charles Dickens</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 650</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-4">
-                <img src="/static/images/product-5.jpg" width="200px">
-                <h4>His Afflicted Mind</h4>
-                <p>by Prabigyan Aryal</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 400</p>
-            </div>
-    
-            <div class="col-4">
-                <img src="/static/images/product-6.jpg" width="200px">
-                <h4>The Archer</h4>
-                <p>by Paulo Coelho</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>Rs.380</p>
-            </div>
-   
-            <div class="col-4">
-                <img src="/static/images/product-7.jpg" width="200px">
-                <h4>Home Body</h4>
-                <p>by Rupi Kaur</p>
-                <div class="rating">
-                   <i class="fa fa-star"></i>
-                   <i class="fa fa-star"></i>
-                   <i class="fa fa-star"></i>
-                   <i class="fa fa-star"></i>
-                   <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs.750</p>
-            </div>
-    
-            <div class="col-4">
-                <img src="/static/images/product-8.jpg" width="200px">
-                <h4>Harry Potter and the Deathly Hallows</h4>
-                <p>by JK Rowling</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 1050</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-4">
-                <img src="/static/images/product-9.jpg" width="200px">
-                <h4>Creative Confidence</h4>
-                <p>by Tom Kelley</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs.620</p>
-            </div>
-    
-            <div class="col-4">
-                <img src="/static/images/product-10.jpg" width="200px">
-                <h4>A Promised Land</h4>
-                <p>by Barack Obama</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 3100</p>
-            </div>
-   
-            <div class="col-4">
-                <img src="/static/images/product-11.jpg" width="200px">
-                <h4>The diary of a wimpy kid: Double Down</h4>
-                <p>by Jeff Kinney</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 620</p>
-            </div>
-    
-            <div class="col-4">
-                <img src="/static/images/product-12.jpg" width="200px">
-                <h4>Think Like A Monk</h4>
-                <p>by Jay Shetty</p>
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                <p>Rs. 720</p>
-            </div>
-        </div>  {% endcomment %}
-         <h2 class="title">New Arrivals</h2>
+<h2 class="title">New Arrivals</h2>
       <div class="row">
          {% for book in books %}
          <div class="col-4">
-            <img src="/static/images/product-{{ forloop.counter }}.jpg" width="100px">
+            <img src={{book.CoverImage}} width="100px">
             <h4>{{book.Title}}</h4>
             <p>by {{book.Author}}</p>
             <div class="rating">

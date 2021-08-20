@@ -1,3 +1,4 @@
+import myapp
 from django.db.models.fields import BooleanField
 #from myapp.forms import Form
 from django.core.checks import messages
@@ -129,6 +130,14 @@ def userlogin(request):
         
         return render(request,'account.html',{'err':err})
 
+def search(request):
+    search = request.POST['search']
+    searched = Book.objects.filter(Title__icontains = search)
+    dict = {
+        'books': searched
+
+    }
+    return render(request,'search.html',dict)
 
 # def userlogin(request):
 #     if request.method == 'POST':

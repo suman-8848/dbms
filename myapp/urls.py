@@ -11,5 +11,6 @@ urlpatterns = [
     path('productsd', views.productsd),
     path('register', views.register, name='register'),
     path('userlogin', views.userlogin, name='userlogin'),
-    path('show', views.show)
+    path('show', views.show),
+    path('search', views.search, name= 'search')
 ]
