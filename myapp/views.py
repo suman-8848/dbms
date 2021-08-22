@@ -13,7 +13,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from mysite import settings
 import time
 from datetime import datetime
-from django.contrib.auth.hashers import make_password,check_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.urls import reverse
 # Create your views here.
 
@@ -35,31 +35,31 @@ def account(request):
 
 
 def products(request):
-    if request.method == "POST" :
-        global search,sorted
+    if request.method == "POST":
+        global search, sorted
         if 'search' in request.POST:
             search = request.POST['search']
-            searched = Book.objects.filter(Title__icontains = search)
+            searched = Book.objects.filter(Title__icontains=search)
             dict = {
                 'books': searched,
-                'search':True
+                'search': True
 
             }
-           
+
         elif 'sort' in request.POST:
             sorted = request.POST['sort']
             if sorted == 'price':
                 value = Book.objects.order_by('Price')
                 dict = {
                     'books': value,
-                
+
 
                 }
             elif sorted == 'name':
                 value = Book.objects.order_by('Title')
                 dict = {
                     'books': value,
-                
+
 
                 }
 
@@ -67,17 +67,16 @@ def products(request):
                 value = Book.objects.order_by('Category')
                 dict = {
                     'books': value,
-                
+
 
                 }
 
-            else:
-                bookdetail = Book.objects.all()
-                dict = {
-                    'books': bookdetail,
-                            
-                
-                }
+        else:
+            bookdetail = Book.objects.all()
+            dict = {
+                'books': bookdetail,
+            }
+
         if request.POST.get('Isbn') is not None:
             cart(request)
     else:
@@ -86,7 +85,7 @@ def products(request):
             'books': bookdetail,
             'search': False
         }
-    return render(request, 'products.html',dict)
+    return render(request, 'products.html', dict)
 
 
 def productsd(request):
@@ -122,33 +121,33 @@ def register(request):
             err = "Fields cannot contain spaces."
         elif (not customer.Name.isalpha()) or (not customer.lastName.isalpha()):
             err = "First name and last name cannot contain digits and special characters."
-        elif Customer.objects.filter(Email = customer.Email):
+        elif Customer.objects.filter(Email=customer.Email):
             err = "Email already registered."
         elif not customer.city.isalpha():
             err = "City cannot contain numbers and special characters."
-        elif len(customer.phone_number)<10:
+        elif len(customer.phone_number) < 10:
             err = "Phone number invalid."
         elif customer.password != confirmedPassword:
             err = "Passwords do not match."
-        
+
         if not err:
             customer.password = make_password(customer.password)
             customer.save()
             return redirect('products')
         else:
             context = {
-                'err':err,
-                'data':{'first_name':customer.Name,
-                        'last_name':customer.lastName,
-                        'city':customer.city,
-                        'postal_code':customer.postal_code,
-                        'state':customer.state,
-                        'phone_number':customer.phone_number,
-                        'email':customer.Email}
+                'err': err,
+                'data': {'first_name': customer.Name,
+                         'last_name': customer.lastName,
+                         'city': customer.city,
+                         'postal_code': customer.postal_code,
+                         'state': customer.state,
+                         'phone_number': customer.phone_number,
+                         'email': customer.Email}
             }
-            return render(request,'register.html',context)
+            return render(request, 'register.html', context)
 
-    return render(request,'register.html')
+    return render(request, 'register.html')
 
 
 def show(request):
@@ -161,7 +160,7 @@ def userlogin(request):
         email = request.POST['username']
         password = request.POST['password']
 
-        #authenticate admin
+        # authenticate admin
         user = authenticate(username=email, password=password)
 
         err = None
@@ -173,17 +172,16 @@ def userlogin(request):
         else:
             customer = None
             try:
-                customer = Customer.objects.get(Email = email)
+                customer = Customer.objects.get(Email=email)
                 request.session['email'] = email
-                #print(customer.password)
+                # print(customer.password)
             except:
                 err = "Email/Username or password incorrect."
-            
+
             if (customer is not None) and check_password(password, customer.password):
                 return redirect('products')
-        
-        
-        return render(request,'account.html',{'err':err})
+
+        return render(request, 'account.html', {'err': err})
 
 # def search(request):
 #     search = request.POST['search']
@@ -227,6 +225,7 @@ def userlogin(request):
 #             # messages.Info(request, "Invalid username or password.")
 #             print('invalid usr pass')
 
+
 def cart(request):
     ISBN = request.POST['Isbn']
     cartObject = request.session.get('cart')
@@ -240,31 +239,33 @@ def cart(request):
         cartObject[ISBN] = 1
     request.session['cart'] = cartObject
 
+
 def checkout(request):
     books = []
     for k in request.session.get('cart'):
-        books.append(Book.objects.get(Isbn_No = k))
+        books.append(Book.objects.get(Isbn_No=k))
 
     context = {
-        'books':books
+        'books': books
     }
-    return render(request,'checkout.html',context)
+    return render(request, 'checkout.html', context)
 
 
 def order(request):
     if request.method == "POST":
         currTime = datetime.now()
-        for k,v in request.session['cart'].items():
+        for k, v in request.session['cart'].items():
             order = Order()
-            book = Book.objects.get(Isbn_No = k)
+            book = Book.objects.get(Isbn_No=k)
             order.book = book
             order.qty = v
             book.Qty -= v
-            order.customer = Customer.objects.get(Email = request.session['email'])
+            order.customer = Customer.objects.get(
+                Email=request.session['email'])
             order.orderDateTime = currTime
             order.save()
         book.save()
 
-        return render(request,'thankyou.html')
+        return render(request, 'thankyou.html')
     else:
         return HttpResponse("403 Forbidden")
