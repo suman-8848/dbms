@@ -34,3 +34,14 @@ class Book(models.Model):
 
     def __str__(self):
         return self.Title
+
+
+class Order(models.Model):
+    #orderID = models.IntegerField()
+    book = models.ForeignKey(Book,on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    qty = models.IntegerField()
+    #totalPrice = models.IntegerField()
+    orderDateTime = models.DateTimeField()
+    class Meta:
+         unique_together = ('id', 'customer', 'book')

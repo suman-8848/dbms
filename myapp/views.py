@@ -12,6 +12,7 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from mysite import settings
 import time
+from datetime import datetime
 from django.contrib.auth.hashers import make_password,check_password
 from django.urls import reverse
 # Create your views here.
@@ -143,6 +144,7 @@ def userlogin(request):
             customer = None
             try:
                 customer = Customer.objects.get(Email = email)
+                request.session['email'] = email
                 #print(customer.password)
             except:
                 err = "Email/Username or password incorrect."
@@ -217,3 +219,22 @@ def checkout(request):
         'books':books
     }
     return render(request,'checkout.html',context)
+
+
+def order(request):
+    if request.method == "POST":
+        currTime = datetime.now()
+        for k,v in request.session['cart'].items():
+            order = Order()
+            book = Book.objects.get(Isbn_No = k)
+            order.book = book
+            order.qty = v
+            book.Qty -= v
+            order.customer = Customer.objects.get(Email = request.session['email'])
+            order.orderDateTime = currTime
+            order.save()
+        book.save()
+
+        return render(request,'thankyou.html')
+    else:
+        return HttpResponse("403 Forbidden")
