@@ -20,6 +20,7 @@ from django.urls import reverse
 #selectedBooks = None
 search = None
 
+
 def index(request):
     bookdetail = Book.objects.all()
     dict = {
@@ -34,28 +35,57 @@ def account(request):
 
 
 def products(request):
-    
-    try:
-        global search
-        search = request.POST['search']
-    except:
-        print("Search is none.")
-    if search:
-        searched = Book.objects.filter(Title__icontains = search)
-        dict = {
-            'books': searched,
-            'search':True
+    if request.method == "POST" :
+        global search,sorted
+        if 'search' in request.POST:
+            search = request.POST['search']
+            searched = Book.objects.filter(Title__icontains = search)
+            dict = {
+                'books': searched,
+                'search':True
 
-        }
+            }
+           
+        elif 'sort' in request.POST:
+            sorted = request.POST['sort']
+            if sorted == 'price':
+                value = Book.objects.order_by('Price')
+                dict = {
+                    'books': value,
+                
+
+                }
+            elif sorted == 'name':
+                value = Book.objects.order_by('Title')
+                dict = {
+                    'books': value,
+                
+
+                }
+
+            elif sorted == 'categories':
+                value = Book.objects.order_by('Category')
+                dict = {
+                    'books': value,
+                
+
+                }
+
+            else:
+                bookdetail = Book.objects.all()
+                dict = {
+                    'books': bookdetail,
+                            
+                
+                }
+        if request.POST.get('Isbn') is not None:
+            cart(request)
     else:
         bookdetail = Book.objects.all()
         dict = {
             'books': bookdetail,
             'search': False
         }
-    if request.POST.get('Isbn') is not None:
-        cart(request)
-
     return render(request, 'products.html',dict)
 
 

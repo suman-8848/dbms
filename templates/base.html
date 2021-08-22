@@ -28,7 +28,7 @@
               <nav>
                  <ul id="MenuItems">
                     <li><a href="/index">Home</a></li>
-                    {% if user.is_authenticated %}
+                    {% if request.session.email %}
                     <li><a href="/products">Books</a></li>
                     {% endif %}
                     <li><a href="">About</a></li>

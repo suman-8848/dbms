@@ -63,17 +63,22 @@
       </div>
       </div>
    </form>
+   <form method="POST" action="products">
+   {% csrf_token %}
    <div class="small-container">
-      <div class="row">
+      <div class="row" >
          <h2><a href="/products">All Products</a></h2>
-         <select>
+         <div class="row" style="display: inline-flex">
+         <select name = "sort">
             <option>Default Sorting</option>
             <option value='price'>Sort by Price</option>
             <option value='categories'>Sort by categories</option>
             <option value='name'>Sort by name</option>
          </select>
-
+         <button type="submit" name="submit" value="submit" class="btn btn-primary active">go</button>
+         </div>
       </div>
+      </form>
       {% if not search %}
       <h2 class="title">New Arrivals</h2>
       {% else %}
